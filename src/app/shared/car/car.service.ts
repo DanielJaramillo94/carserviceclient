@@ -31,4 +31,8 @@ export class CarService {
   remove(href: string) {
     return this.http.delete(href);
   }
+
+  getOwners(): Observable<any> {
+    return this.http.get(this.API + '/owners');
+  }
 }

@@ -1,0 +1,9 @@
+.home {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.app-car-list__container {
+  width: 100%;
+}
