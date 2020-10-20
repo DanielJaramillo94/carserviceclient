@@ -1,11 +1,16 @@
 <mat-card>
   <mat-card-title>Owner List</mat-card-title>
-  <mat-selection-list >
+  <mat-selection-list #ownersNode>
     <mat-list-option class="mat-primary" *ngFor="let owner of owners">
       {{owner.name}}
     </mat-list-option>
   </mat-selection-list>
 
   <button mat-fab color="primary" [routerLink]="['/owner-add']">Add</button>
-  <button mat-fab color="primary" class="button__delete">Delete</button>
+  <button mat-fab color="primary" class="button__delete" *ngIf="ownersNode.selectedOptions.selected.length>0">Delete</button>
+  <button mat-fab color="primary" class="button__delete" *ngIf="ownersNode.selectedOptions.selected.length==1">Edit</button>
+
+<p>
+  Options selected: {{ownersNode.selectedOptions.selected.length}}
+</p>
 </mat-card>

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 export class CarService {
   public API = '//thawing-chamber-47973.herokuapp.com';
   public CAR_API = this.API + '/cars';
+  public OWNER_API = this.API + '/owners';
 
   constructor(private http: HttpClient) {
   }
@@ -34,5 +35,15 @@ export class CarService {
 
   getOwners(): Observable<any> {
     return this.http.get(this.API + '/owners');
+  }
+
+  saveOwner(owner: any): Observable<any> {
+    let result: Observable<Object>;
+    if (owner['href']) {
+      result = this.http.put(owner.href, owner);
+    } else {
+      result = this.http.post(this.OWNER_API, owner);
+    }
+    return result;
   }
 }

@@ -48,7 +48,7 @@ export class OwnerEditComponent implements OnInit, OnDestroy {
   }
 
   save(form: NgForm) {
-    this.carService.save(form).subscribe(result => {
+    this.carService.saveOwner(form).subscribe(result => {
       this.gotoList();
     }, error => console.error(error));
   }
