@@ -5,7 +5,9 @@
       <mat-list-item *ngFor="let car of cars; let i = index">
         <img mat-list-avatar src="{{car.giphyUrl}}" alt="{{car.name}}">
         <h3 mat-line>
-          <a mat-button (click)="goToEditCar(i)">{{car.name}}</a>
+          <a mat-button (click)="goToEditCar(i)">{{car.name}}
+            <span style="color: gray; font-size: 0.6em;">(ownerDni: {{car.ownerDni ? car.ownerDni : 'null'}})</span>
+            </a>
         </h3>
       </mat-list-item>
     </mat-list>
