@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CarService } from '../shared/car/car.service';
 import { GiphyService } from '../shared/giphy/giphy.service';
 
@@ -11,7 +12,7 @@ export class OwnerListComponent implements OnInit {
   owners: Array<any>;
   selectedIndex: Array<any> = [];
 
-  constructor(private carService: CarService) { }
+  constructor(private carService: CarService, private router: Router) { }
 
   ngOnInit() {
     this.carService.getOwners().subscribe(data => {
@@ -38,5 +39,17 @@ export class OwnerListComponent implements OnInit {
         this.owners.splice(index, 1);
       }, error => console.error(error));
     })
+    this.selectedIndex = [];
+  }
+
+  editOwner() {
+    this.goToEditOwner(this.selectedIndex[0]);
+  }
+
+  goToEditOwner(index){
+    let owner = this.owners[index];
+    let splittedHref = owner._links.owner.href.split('/');
+    let ownerId = splittedHref[splittedHref.length-1]
+    this.router.navigate(['/owner-edit', ownerId]);
   }
 }

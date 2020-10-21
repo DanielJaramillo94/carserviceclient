@@ -9,5 +9,5 @@
 
   <button mat-fab color="primary" [routerLink]="['/owner-add']">Add</button>
   <button mat-fab color="primary" class="button__delete" *ngIf="ownersNode.selectedOptions.selected.length>0" (click)="removeOwners()">Delete</button>
-  <button mat-fab color="primary" class="button__delete" *ngIf="ownersNode.selectedOptions.selected.length==1">Edit</button>
+  <button mat-fab color="primary" class="button__delete" *ngIf="ownersNode.selectedOptions.selected.length==1" (click)="editOwner()">Edit</button>
 </mat-card>

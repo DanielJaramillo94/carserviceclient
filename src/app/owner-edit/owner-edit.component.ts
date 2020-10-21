@@ -14,6 +14,7 @@ export class OwnerEditComponent implements OnInit, OnDestroy {
   owner: any = {};
 
   sub: Subscription;
+  isEditting: boolean;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -25,16 +26,18 @@ export class OwnerEditComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
-        this.carService.get(id).subscribe((car: any) => {
-          if (car) {
-            this.owner = car;
-            this.owner.href = car._links.self.href;
-            this.giphyService.get(car.name).subscribe(url => car.giphyUrl = url);
+        this.isEditting = true;
+        this.carService.getOwner(id).subscribe((owner: any) => {
+          if (owner) {
+            this.owner = owner;
+            this.owner.href = owner._links.self.href;
           } else {
             console.log(`Car with id '${id}' not found, returning to list`);
             this.gotoList();
           }
         });
+      } else {
+        this.isEditting = false;
       }
     });
   }
@@ -54,6 +57,7 @@ export class OwnerEditComponent implements OnInit, OnDestroy {
   }
 
   remove(href) {
+
     this.carService.remove(href).subscribe(result => {
       this.gotoList();
     }, error => console.error(error));

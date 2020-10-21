@@ -37,6 +37,10 @@ export class CarService {
     return this.http.get(this.API + '/owners');
   }
 
+  getOwner(id: string): Observable<any> {
+    return this.http.get(this.OWNER_API + '/' + id);
+  }
+
   saveOwner(owner: any): Observable<any> {
     let result: Observable<Object>;
     if (owner['href']) {

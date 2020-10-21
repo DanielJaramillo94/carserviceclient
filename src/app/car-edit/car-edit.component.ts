@@ -14,6 +14,7 @@ export class CarEditComponent implements OnInit, OnDestroy {
   car: any = {};
 
   sub: Subscription;
+  isEditting: boolean;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -25,6 +26,7 @@ export class CarEditComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
+        this.isEditting = true;
         this.carService.get(id).subscribe((car: any) => {
           if (car) {
             this.car = car;
@@ -35,6 +37,8 @@ export class CarEditComponent implements OnInit, OnDestroy {
             this.gotoList();
           }
         });
+      } else {
+        this.isEditting = false;
       }
     });
   }
