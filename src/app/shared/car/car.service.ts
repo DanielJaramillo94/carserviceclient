@@ -12,7 +12,7 @@ export class CarService {
   }
 
   getAll(): Observable<any> {
-    return this.http.get(this.API + '/cool-cars');
+    return this.http.get(this.CAR_API);
   }
 
   get(id: string) {
@@ -45,5 +45,9 @@ export class CarService {
       result = this.http.post(this.OWNER_API, owner);
     }
     return result;
+  }
+
+  deleteOwner(ownerHref: any): Observable<any> {
+    return this.http.delete(ownerHref);
   }
 }

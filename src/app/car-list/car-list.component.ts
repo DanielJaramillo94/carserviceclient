@@ -14,7 +14,7 @@ export class CarListComponent implements OnInit {
 
   ngOnInit() {
     this.carService.getAll().subscribe(data => {
-      this.cars = data;
+      this.cars = data._embedded.cars;
       for (const car of this.cars) {
         this.giphyService.get(car.name).subscribe(url => car.giphyUrl = url);
       }
