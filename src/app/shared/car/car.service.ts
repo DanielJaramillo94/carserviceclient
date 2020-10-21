@@ -51,7 +51,26 @@ export class CarService {
     return result;
   }
 
-  deleteOwner(ownerHref: any): Observable<any> {
-    return this.http.delete(ownerHref);
+  deleteOwner(owner: any): Observable<any> {
+    this.deleteCarRelation(owner);
+    let href = owner._links.owner.href;
+    return this.http.delete(href);
+  }
+
+  deleteCarRelation(owner: any) {
+    this.deleteCarsWithDni(owner.dni);
+  }
+
+  deleteCarsWithDni(dni) {
+    this.getAll().subscribe(data => {
+      let cars = data._embedded.cars;
+      for (const car of cars) {
+        if(car.ownerDni === dni) {
+          let newCar = {href: car._links.car.href, name: car.name, ownerDni: ''};
+          this.save(newCar).subscribe(result => {
+          }, error => console.error(error));
+        }
+      }
+    });
   }
 }

@@ -34,8 +34,7 @@ export class OwnerListComponent implements OnInit {
 
   removeOwners() {
     this.selectedIndex.forEach((index)=> {
-      let href = this.owners[index]._links.owner.href;
-      this.carService.deleteOwner(href).subscribe(result => {
+      this.carService.deleteOwner(this.owners[index]).subscribe(result => {
       }, error => console.error(error));
       this.owners.splice(index, 1);
     })
