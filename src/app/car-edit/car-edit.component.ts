@@ -44,7 +44,7 @@ export class CarEditComponent implements OnInit, OnDestroy {
   }
 
   gotoList() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
   }
 
   save(form: NgForm) {
@@ -59,4 +59,3 @@ export class CarEditComponent implements OnInit, OnDestroy {
     }, error => console.error(error));
   }
 }
-
